@@ -48,11 +48,7 @@ public record TransactionId(int ProductId, string TransactionNumber)
 
   public static explicit operator TransactionId(string hashId)
   {
-    var str = System.Text.Encoding.UTF8.GetString(Convert.FromHexString(hashids.DecodeHex(hashId)));
-    //var str = hashids.DecodeHex(hashId)
-    //  .Chunk(2)
-    //  .Select(x => (char)Convert.ToByte(new string(x), 16))
-    //  .Aggregate(string.Empty, (x, y) => x += y);
+    var str = System.Text.Encoding.UTF8.GetString(Convert.FromHexString(hashids.DecodeHex(hashId)));    
     var split = str.Split('|');
     return new TransactionId(int.Parse(split.First()), split.Last());
   }
